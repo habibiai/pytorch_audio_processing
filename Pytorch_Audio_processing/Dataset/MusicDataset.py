@@ -7,7 +7,7 @@ import torch
 
 
 
-class UrbanSoundDataset(Dataset):
+class MusicGenreDataset(Dataset):
 
     def __init__(self,annot_dir,transformation,target_sample_rate, num_samples, device):
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         n_mels=n_mels
     )
 
-    usd = UrbanSoundDataset(
+    usd = MusicGenreDataset(
         annot_dir,
         transformation=mel_spectrogram,
         target_sample_rate = sample_rate,
