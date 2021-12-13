@@ -17,7 +17,8 @@ class CNNNet(torch.nn.Module):
                 padding = 2
             ),
             torch.nn.ReLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.MaxPool2d(kernel_size=2),
+            torch.nn.BatchNorm2d(16)
 
         )
 
@@ -30,7 +31,8 @@ class CNNNet(torch.nn.Module):
                 padding=2
             ),
             torch.nn.ReLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.MaxPool2d(kernel_size=2),
+            torch.nn.BatchNorm2d(32)
 
         )
 
@@ -43,7 +45,8 @@ class CNNNet(torch.nn.Module):
                 padding=2
             ),
             torch.nn.ReLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.MaxPool2d(kernel_size=2),
+            torch.nn.BatchNorm2d(64)
 
         )
 
@@ -56,12 +59,14 @@ class CNNNet(torch.nn.Module):
                 padding=2
             ),
             torch.nn.ReLU(),
-            torch.nn.MaxPool2d(kernel_size=2)
+            torch.nn.MaxPool2d(kernel_size=2),
+            torch.nn.BatchNorm2d(128),
+            torch.nn.Dropout(0.3)
         )
 
         self.flatten = torch.nn.Flatten()
         self.linear = torch.nn.Linear(128*5*4, n_classes)
-        self.softmax = torch.nn.Softmax(dim = 1)
+        self.softmax = torch.nn.Softmax(dim=1)
 
     def forward(self,input_data):
         x1 = self.conv1(input_data)
@@ -72,6 +77,7 @@ class CNNNet(torch.nn.Module):
         x_flatten = self.flatten(x4)
         logits = self.linear(x_flatten)
         predictions = self.softmax(logits)
+        return predictions
 
 
 

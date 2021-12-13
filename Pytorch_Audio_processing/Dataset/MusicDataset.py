@@ -34,8 +34,8 @@ class MusicGenreDataset(Dataset):
         signal = self._right_pad_if_necessary(signal)
         signal = self.transformation(signal)
 
-        print("path", audio_sample_path)
-        print("label", label)
+        # print("path", audio_sample_path)
+        # print("label", label)
 
         return signal,label
 
